@@ -56,6 +56,15 @@ Now you have three 130-year monthly files, one for each of the three meteorologi
 
 
 
+Step 5. Create a masking file
+
+Next, you will have to interpolate the data. The raw data are at 11-km x 11-km resolution, which will not work with the LPJ-GUESS crop/mgmt version. Instead, the gridded data must be evenly spaced as measured in degrees latitude and degrees longitude.  Interpolation from 11-km x 11-km to .25˚ x .25˚ or to .125˚ x .125˚ is relatively straightforward, but there are a couple things to be aware of. Firstly, our study area is Bavaria, meaning we must be careful not to use any data points that fall completely outside the geopolitical boundary of the state.  Secondly, interpolation requires a source grid and a destination grid, both of which we will have to create ourselves.
+
+Run the ncl script Bavaria_shpmask.ncl:
+
+ncl Bavaria_shpmask.ncl
+
+This script will create a mask to clip the driver files so that they only contain data with the geopolitical extent of Bavaria.   It uses the shapefile "Bayern_ex.shp,” which was downloaded from http://www.geodaten.bayern.de/opendata/Bayern.zip. The masking file created is called "Bayern_mask.nc." 
 
 
 

@@ -1,3 +1,5 @@
+## by Christian Zang
+
 install.packages("rgdal")
 install.packages("rgeos")
 install.packages("xlsx")
@@ -22,7 +24,7 @@ plot(bav_shape)
 ## get spatial extent of Bavaria
 ex <- raster::extent(bav_shape)
 
-## create full raster based on spatial extent
+## create full raster based on spatial extent. Choose .125 or .25 degree resolution.
 lon <- seq(floor(ex@xmin), ceiling(ex@xmax), by = 0.25)
 lat <- seq(floor(ex@ymin), ceiling(ex@ymax), by = 0.25)
 full_grid <- expand.grid(lon, lat)

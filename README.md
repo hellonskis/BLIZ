@@ -105,6 +105,13 @@ This script will take the lat/lon points contained in the Bavaria_125_coords.txt
 
 
 
+Step 9. Run the script InterpLPJ_new.ncl 
+
+Now the fun part. Open the script InterpLPJ_new.ncl and set the appropriate input and output filenames at the top (lines 19-47). This script will first reproject the driver data to WGS84 coordinates, creating three intermediary files called “pr_out_45.nc,” “tas_out_45.nc” and “rsds_out_45.nc.” If you want to change their names so that you can compare the reprojected files for the two different experiments, you can do this. Just change “pr_out_45.nc” to “pr_out_85.nc” (line 100), change “tas_out_45.nc” to “tas_out_85.nc” (line 244), and change “rsds_out_45.nc” to “rsds_out_85.nc” (line 388).  The script will create three files (with the output names you specify at the top of the script), which can be now be used with LPJ-GUESS.
+
+
+
+
 
 
 

@@ -184,6 +184,7 @@ begin
 
   k->pr = pr_regrid
   
+  ;-- Add some other attribute information we need to avoid LPJ-GUESS errors
   system("ncatted -a coordinates,pr,c,c,'lat lon' " +pr_outname)
   system("ncatted -a standard_name,lon,c,c,longitude " +pr_outname)
   system("ncatted -a standard_name,lat,c,c,latitude " +pr_outname)
@@ -328,6 +329,7 @@ begin
 
   m->tas = tas_regrid
 
+  ;-- Add some other attribute information we need to avoid LPJ-GUESS errors
   system("ncatted -a coordinates,tas,c,c,'lat lon' " +tas_outname)
   system("ncatted -a standard_name,lon,c,c,longitude " +tas_outname)
   system("ncatted -a standard_name,lat,c,c,latitude " +tas_outname)
@@ -472,6 +474,7 @@ begin
 
   o->rsds = rsds_regrid
 
+  ;-- Add some other attribute information we need to avoid LPJ-GUESS errors
   system("ncatted -a coordinates,rsds,c,c,'lat lon' " +rsds_outname)
   system("ncatted -a standard_name,lon,c,c,longitude " +rsds_outname)
   system("ncatted -a standard_name,lat,c,c,latitude " +rsds_outname)

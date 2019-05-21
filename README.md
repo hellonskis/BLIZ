@@ -66,5 +66,33 @@ ncl Bavaria_shpmask.ncl
 
 This script will create a mask to clip the driver files so that they only contain data with the geopolitical extent of Bavaria.   It uses the shapefile "Bayern_ex.shp,” which was downloaded from http://www.geodaten.bayern.de/opendata/Bayern.zip. The masking file created is called "Bayern_mask.nc." 
 
+Note that you may not be able to use the same masking file for every dataset or that you download from the LfU cloud server. Instead, you will have to recreate this masking file each time. This is because the two datasets thus far provided by LfU use different grids and cover different areas. If grid size/areas are inconsistent, we have to create a unique masking file for each grid.  In Bavaria_shpmask.ncl, you will notice two lines which look something like:
+
+f = addfile(“pr_Bayern_**rcp45**_1971-2100.nc”, “r”)
+;f = addfile(“pr_Bayern_**rcp85**_1971-2100.nc”, “r”)
+
+Use the appropriate driver file to create your masking file, otherwise ncl will complain about mismatched grid sizes.
+
+
+
+Step 6. Clip the driver files to the masking file with cdo: 
+
+cdo div pr_1971-2100_monsum.nc Bayern_mask.nc pr_masked_rcp45.nc
+
+cdo div tas_1971-2100_mon.nc Bayern_mask.nc tas_masked_rcp45.nc
+
+cdo div rsds rsds_1971-2100_mon.nc Bayern_mask.nc rsds_masked.nc
+
+I recommend that you name the output files “pr_masked_rcp45.nc”/”pr_masked_rcp85.nc,” “tas_masked_rcp45.nc”/”tas_masked_rcp85.nc,” and “rsds_masked_rcp45.nc”/”rsds_masked_rcp85.nc” as I have done, since these are the input filenames used in the interpolation script (step 9). You can always change these if you like, just be sure to remember which experiment you are regridding so you can specify the appropriate output filenames. 
+
+Note that these masked driver files are still in rotated polar coordinates. Next, we need to reproject the masked data to WGS84.
+
+
+
+Step 7. Create Bavarian WGS84 coordinates list
+
+Christian Zang has written an R script, bavaria_coords.r, which will produce a .csv file, "Bavaria_125_coords.csv". Open this file (in excel, for example) and remove all unnecessary column data so that you have a file with only two columns, x and y. These columns are effectively a list of points at .125-degree (or .25-degree) intervals that either intersect or fall within the boundary of the Bayern_ex.shp file. These points will be used to interpolate the driver data. I already did this, so you can use the .txt file I created, "Bavaria_125_coords.txt" (or "Bavaria_25_coords.txt").
+
+
 
 

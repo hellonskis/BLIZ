@@ -95,4 +95,19 @@ Christian Zang has written an R script, bavaria_coords.r, which will produce a .
 
 
 
+Step 8. Write Bavarian WGS84 array to netcdf
+
+Run the ncl script Create_Bavaria_WGSgrid.ncl.
+
+ncl Create_Bavaria_WGSgrid.ncl
+
+This script will take the lat/lon points contained in the Bavaria_125_coords.txt file and write them to a netcdf file as a raster, which will be used as our "target grid" for the interpolation. This netcdf file will be called "Bavaria_WGS_125_mask.nc" or "Bavaria_WGS_25_mask.nc" (depending on which one you select in the script). Again, I've already done this so you can simply use the netcdf files I made.
+
+
+
+
+
+
+
+
 
